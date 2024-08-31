@@ -18,8 +18,11 @@ public class Theft : MonoBehaviour
 
     private void Mover()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        string horizontalAxis = "Horizontal";
+        string verticalAxis = "Vertical";
+
+        float moveHorizontal = Input.GetAxis(horizontalAxis);
+        float moveVertical = Input.GetAxis(verticalAxis);
 
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
 
