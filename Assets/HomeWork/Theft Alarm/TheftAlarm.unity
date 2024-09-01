@@ -268,9 +268,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 556251263}
-  - component: {fileID: 556251262}
-  - component: {fileID: 556251261}
   - component: {fileID: 556251260}
+  - component: {fileID: 556251264}
+  - component: {fileID: 556251266}
+  - component: {fileID: 556251265}
   m_Layer: 0
   m_Name: alarm
   m_TagString: Untagged
@@ -323,21 +324,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2641077, y: 1}
   m_EdgeRadius: 0
---- !u!114 &556251261
-MonoBehaviour:
+--- !u!4 &556251263
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 556251259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37e70a24b65f99d4d90aa21c920630d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sound: {fileID: 556251262}
-  _volumeChangeSpeed: 1
---- !u!82 &556251262
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.61, y: -0.45, z: -9.954276}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &556251264
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -433,21 +435,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!4 &556251263
-Transform:
+--- !u!114 &556251265
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 556251259}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.61, y: -0.45, z: -9.954276}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37e70a24b65f99d4d90aa21c920630d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _volumeChanger: {fileID: 556251266}
+--- !u!114 &556251266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556251259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abf8305d82ba23243a803f0014a5b236, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound: {fileID: 556251264}
+  _volumeChangeSpeed: 1
 --- !u!1 &810107444
 GameObject:
   m_ObjectHideFlags: 0

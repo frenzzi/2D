@@ -1,45 +1,58 @@
-using System;
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(VolumeChanger))]
 public class Alarm : MonoBehaviour
 {
-    [SerializeField] private AudioSource _sound;
-    [SerializeField] private float _volumeChangeSpeed = 1.0f;
+    [SerializeField] private VolumeChanger _volumeChanger;
 
     private bool _isActivate = false;
 
-    private bool IsMaxOrMinVolume => (_sound.volume == 0) || (_sound.volume == 1);
-
-    private void Awake()
-    {
-        _sound.volume = 0;
-    }
+    private Vector3 _enterPosition;
+    private Vector3 _exitPosition;
+    private Vector3 _alarmPosition;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        _enterPosition = collision.transform.position;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        _exitPosition = collision.transform.position;
+
         if (collision.gameObject.GetComponent<Theft>())
         {
-            _isActivate = !_isActivate;
-            StartCoroutine(Activating());
+            Activate();
         }
     }
 
-    private IEnumerator Activating()
+    private void Activate()
     {
-        while (isActiveAndEnabled)
+        if (IsChangeEntrance() == false)
+            return;
+
+        _isActivate = !_isActivate;
+
+        if (_isActivate)
         {
-            _sound.volume = Mathf.MoveTowards(_sound.volume, Convert.ToInt32(_isActivate), _volumeChangeSpeed * Time.deltaTime);
-
-            if (IsMaxOrMinVolume)
-            {
-                break;
-            }
-
-            yield return null;
+            _volumeChanger.ChangeToMax();
+        }
+        else
+        {
+            _volumeChanger.ChangeToMin();
         }
     }
 
+    private bool IsChangeEntrance()
+    {
+        bool isChangeEntrance = false;
+
+        Vector3 normalizeEnterPosition = _enterPosition - transform.position;
+        Vector3 normalizeExitPosition = _exitPosition - transform.position;
+
+        if ((normalizeEnterPosition.x * normalizeExitPosition.x < 0) || (normalizeEnterPosition.y * normalizeExitPosition.y < 0))
+            isChangeEntrance = true;
+
+        return isChangeEntrance;
+    }
 }
