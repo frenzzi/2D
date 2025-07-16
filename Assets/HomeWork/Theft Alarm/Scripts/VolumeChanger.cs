@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -11,21 +10,26 @@ public class VolumeChanger : MonoBehaviour
     private float _minVolume = 0;
     private float _maxVolume = 1.0f;
 
+    private IEnumerator _maxVolumeCoroutine;
+    private IEnumerator _minVolumeCoroutine;
+
     private void Awake()
     {
         _sound.volume = 0;
+        _maxVolumeCoroutine = ChangeTo(_maxVolume);
+        _minVolumeCoroutine = ChangeTo(_minVolume);
     }
 
     public void ChangeToMax()
     {
-        StopAllCoroutines();
-        StartCoroutine(ChangeTo(_maxVolume));
+        StopCoroutine(_minVolumeCoroutine);
+        StartCoroutine(_maxVolumeCoroutine);
     }
 
     public void ChangeToMin()
     {
-        StopAllCoroutines();
-        StartCoroutine(ChangeTo(_minVolume));
+        StopCoroutine(_maxVolumeCoroutine);
+        StartCoroutine(_minVolumeCoroutine);
     }
 
     private IEnumerator ChangeTo(float newVolume)

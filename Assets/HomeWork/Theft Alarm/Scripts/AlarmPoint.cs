@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(VolumeChanger))]
-public class Alarm : MonoBehaviour
+public class AlarmPoint : MonoBehaviour
 {
     [SerializeField] private VolumeChanger _volumeChanger;
 
