@@ -10,33 +10,43 @@ public class VolumeChanger : MonoBehaviour
     private float _minVolume = 0;
     private float _maxVolume = 1.0f;
 
-    private IEnumerator _maxVolumeCoroutine;
-    private IEnumerator _minVolumeCoroutine;
+    private IEnumerator _activeCoroutine;
+
 
     private void Awake()
     {
         _sound.volume = 0;
-        _maxVolumeCoroutine = ChangeTo(_maxVolume);
-        _minVolumeCoroutine = ChangeTo(_minVolume);
     }
 
     public void ChangeToMax()
     {
-        StopCoroutine(_minVolumeCoroutine);
-        StartCoroutine(_maxVolumeCoroutine);
+        ChangeVolume(_maxVolume);
     }
 
     public void ChangeToMin()
     {
-        StopCoroutine(_maxVolumeCoroutine);
-        StartCoroutine(_minVolumeCoroutine);
+        ChangeVolume(_minVolume);
+    }
+
+    private void ChangeVolume(float targetVolume)
+    {
+        if (_activeCoroutine != null)
+        {
+            StopCoroutine(_activeCoroutine);
+        }
+
+        _activeCoroutine = ChangeTo(targetVolume);
+        StartCoroutine(_activeCoroutine);
     }
 
     private IEnumerator ChangeTo(float newVolume)
     {
-        while (_sound.volume != newVolume)
+        while (Mathf.Approximately(_sound.volume, newVolume) == false)
         {
-            _sound.volume = Mathf.MoveTowards(_sound.volume, newVolume, _volumeChangeSpeed * Time.deltaTime);
+            _sound.volume = Mathf.MoveTowards(
+                _sound.volume, 
+                newVolume, 
+                _volumeChangeSpeed * Time.deltaTime);
 
             yield return null;
         }

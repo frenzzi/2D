@@ -7,7 +7,7 @@ public class AlarmArea : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<Theft>())
+        if (collision.TryGetComponent<Theft>(out _))
         {
             _volumeChanger.ChangeToMax();
         }
@@ -15,7 +15,7 @@ public class AlarmArea : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<Theft>())
+        if (collision.TryGetComponent<Theft>(out _))
         {
             _volumeChanger.ChangeToMin();
         }
