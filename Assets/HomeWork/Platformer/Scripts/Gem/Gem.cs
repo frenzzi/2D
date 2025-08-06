@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Platformer
@@ -16,11 +14,6 @@ namespace Platformer
             {
                 Collected?.Invoke(this);
             }
-
-            //if (collision.gameObject.TryGetComponent<Gem>(out _))
-            //{
-            //    Destroy(this);
-            //}
         }
     }
 }

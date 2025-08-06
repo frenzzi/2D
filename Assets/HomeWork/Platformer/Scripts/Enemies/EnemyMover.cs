@@ -1,8 +1,6 @@
-using Platformer;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UIElements;
 
 namespace Platformer
 {
@@ -10,12 +8,7 @@ namespace Platformer
     [RequireComponent(typeof(Enemy))]
     public class EnemyMover : MonoBehaviour
     {
-        public enum MoveAxis
-        {
-            OnlyX,
-            OnlyY,
-            XY
-        }
+
 
         private const float DistanceThreshold = 0.1f;
 
@@ -23,25 +16,16 @@ namespace Platformer
         [SerializeField, Min(0)] private float _speed;
         [SerializeField] private bool _isFacingRight = true;
 
-        private Enemy _enemy;
+        public event UnityAction MoveEnded;
+        public enum MoveAxis
+        {
+            OnlyX,
+            OnlyY,
+            XY
+        }
+
         private Rigidbody2D _rigidbody2d;
         private Coroutine _moveCoroutine;
-
-        public event UnityAction MoveEnded;
-
-        private void Awake()
-        {
-            InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
-            _rigidbody2d = GetComponent<Rigidbody2D>();
-            _rigidbody2d.freezeRotation = true;
-            _rigidbody2d.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-
-            _enemy = GetComponent<Enemy>();
-        }
 
         public IEnumerator MoveToTarget(Transform target)
         {
@@ -56,7 +40,19 @@ namespace Platformer
             yield return _moveCoroutine;
         }
 
-        public void StopMovement()
+        private void Awake()
+        {
+            InitializeComponent();
+        }
+
+        private void InitializeComponent()
+        {
+            _rigidbody2d = GetComponent<Rigidbody2D>();
+            _rigidbody2d.freezeRotation = true;
+            _rigidbody2d.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        }
+        
+        private void StopMovement()
         {
             StopCurrentMovement();
             StopRigidbody();

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -13,14 +11,14 @@ namespace Platformer
         [SerializeField] private float _jumpHeight = 6.5f;
         [SerializeField] private float _gravityScale = 1.5f;
 
-        private int _moveDirection = 0;
-        private Rigidbody2D _rigidbody2d;
+        public bool IsGrounded => Math.Abs(_rigidbody2d.velocity.y) < 0.01f;
+        public bool IsRising => _rigidbody2d.velocity.y > 0;
 
         public event Action MovementBegun;
         public event Action MovementStopped;
 
-        public bool IsGrounded => Math.Abs(_rigidbody2d.velocity.y) < 0.01f;
-        public bool IsRising => _rigidbody2d.velocity.y > 0;
+        private int _moveDirection = 0;
+        private Rigidbody2D _rigidbody2d;
 
         private void Awake()
         {

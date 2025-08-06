@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +6,6 @@ namespace Platformer
     public class GemCounter : MonoBehaviour
     {
         [SerializeField] private GemSpawner _spawner;
-
         [SerializeField] private int _score;
         private Text _text;
 

@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Platformer;
-using UnityEngine.Rendering;
-using Unity.VisualScripting;
 
 namespace Platformer
 {
@@ -12,8 +7,6 @@ namespace Platformer
     {
         private Animator _animator;
         private PlayerController _controller;
-
-        private bool IsMoving;
 
         private void Awake()
         {
